@@ -1,33 +1,40 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import reactLogo from '@/assets/react.svg';
+import logo from '../../public/icon/32.png'
 import wxtLogo from '/wxt.svg';
 import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [word, setWord] = useState("")
+
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (!word.length) return;
+    let url = `https://dictionary.cambridge.org/dictionary/english/${word}`;
+    window.open(url, "_blank");
+    setWord("")
+    window.close();
+  }
 
   return (
     <>
       <div>
-        <a href="https://wxt.dev" target="_blank">
-          <img src={wxtLogo} className="logo" alt="WXT logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <nav>
+          <div>
+            <img width={32} height={32} src={logo} alt="cambridge dictionary icon" />
+          </div>
+          <div>The Cambridge Dictionary</div>
+        </nav>
+        <hr />
+        <main>
+          <form onSubmit={onSubmit}>
+            <input type="text" value={word} onChange={(e) => setWord(e.target.value)} required />
+            <div className='my-3'>
+              <button type='submit'>search</button>
+            </div>
+          </form>
+        </main>
       </div>
-      <h1>WXT + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the WXT and React logos to learn more
-      </p>
     </>
   );
 }
