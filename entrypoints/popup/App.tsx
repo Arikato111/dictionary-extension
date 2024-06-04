@@ -1,7 +1,5 @@
 import { FormEvent, useState } from 'react';
-import reactLogo from '@/assets/react.svg';
 import logo from '../../public/icon/32.png'
-import wxtLogo from '/wxt.svg';
 import './App.css';
 
 function App() {
